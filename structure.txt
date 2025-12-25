@@ -1,0 +1,17 @@
+structure of the application
+
+the purpose:
+    create a stock prediction algorithm based on central mean theorem
+        -take an input from the user to determine a time frame
+        -take the mean of the closing price in that frame
+        -calcualte the standard deviation
+        -take the momentum of the price
+        -create a probability distribution model to predict the chance of a certain closing price in the future
+        -skew the model based on the momentum
+
+extras:
+    GUI:
+        create a GUI that makes the data entry easier
+        create graphs that show the probability of enetered price being higher that input
+    Json:
+        create a system that stores previous simulations to see how close they were to the real price
