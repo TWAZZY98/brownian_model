@@ -1,23 +1,16 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as mp
-import yfinance as yf
 import normalmodel as nm
+import csvdatabase as csvd
 
 def main():
     print("this is the a normal model stock prediction")
       
     nam = input(f"Name of stock you want to predict ")
     time = input(f"how many months in the future do you want to predict?: ")
-    
-    cache={}
-    def get_data(ticker):
-        if ticker not in cache:
-            cache[ticker] = True
-            yf.download(ticker,progress=False,period="max")
-        return cache[ticker]
-    
-    df = get_data(nam)
+        
+    df = csvd.get_data(nam)
     print(df.iloc[-1])
     initdate = df.index[-1]- pd.DateOffset(months=int(time)) 
     dft = df.loc[df.index <= initdate, "Close"]
