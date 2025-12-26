@@ -9,7 +9,7 @@ csv_folder = 'csvfolder'
 
 os.makedirs(csv_folder, exist_ok=True)
 
-def load_json():
+def _load_json():
     global atickers
     
     if not os.path.exists(json_file_path):
@@ -25,26 +25,26 @@ def load_json():
         with open(json_file_path, "w") as file:
             json.dump({},file)
     
-def save_json():
+def _save_json():
     with open(json_file_path,"w") as file:
         json.dump(atickers,file)
 
 def get_data(ticker:str):
-    load_json()
+    _load_json()
     down = None
     if ticker not in atickers:
-        down = update_ticker_data(ticker)
+        down = _update_ticker_data(ticker)
         atickers[ticker] = date.today().isoformat()
         print(atickers)
-        save_json()
+        _save_json()
 
     else:
-        print(f"do you want to update {ticker} data? y-> Yes, n-> no")
+        print(f"last updated {atickers[ticker]} do you want to update {ticker} data? y-> Yes, n-> no")
         dec = input()
         dec = dec.lower()
         if dec =="y":
-            down = update_ticker_data(ticker)
-            save_json()
+            down = _update_ticker_data(ticker)
+            _save_json()
         else:
             filename = f"{ticker}.csv"
             filepath = os.path.join(csv_folder,filename)
@@ -52,7 +52,7 @@ def get_data(ticker:str):
             
     return down
 
-def update_ticker_data(ticker):
+def _update_ticker_data(ticker):
         filename = f"{ticker}.csv"
         fullpath = os.path.join(csv_folder,filename)
         down = yf.download(ticker,progress=False,period="max")
