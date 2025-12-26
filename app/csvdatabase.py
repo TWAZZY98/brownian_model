@@ -1,20 +1,54 @@
 import os
 import yfinance as yf
+import pandas as pd
+import json
+from datetime import date
 
+json_file_path = 'data.json'
 csv_folder = 'csvfolder'
-atickers = []
+
+os.makedirs(csv_folder, exist_ok=True)
+
+def load_json():
+    global atickers
     
-def get_data(ticker):
+    if not os.path.exists(json_file_path):
+        with open(json_file_path,"w") as file:
+            json.dump({},file)
+            atickers = {}
+        return
+    try:
+        with open(json_file_path,"r") as file:
+            atickers = json.load(file)
+    except json.JSONDecodeError:
+        atickers ={}
+        with open(json_file_path, "w") as file:
+            json.dump({},file)
+    
+def save_json():
+    with open(json_file_path,"w") as file:
+        json.dump(atickers,file)
+
+def get_data(ticker:str):
+    load_json()
     down = None
     if ticker not in atickers:
         down = update_ticker_data(ticker)
+        atickers[ticker] = date.today().isoformat()
+        print(atickers)
+        save_json()
 
     else:
         print(f"do you want to update {ticker} data? y-> Yes, n-> no")
         dec = input()
         dec = dec.lower()
-        if dec.find("y"):
+        if dec =="y":
             down = update_ticker_data(ticker)
+            save_json()
+        else:
+            filename = f"{ticker}.csv"
+            filepath = os.path.join(csv_folder,filename)
+            down = pd.read_csv(filepath)
             
     return down
 
@@ -22,5 +56,11 @@ def update_ticker_data(ticker):
         filename = f"{ticker}.csv"
         fullpath = os.path.join(csv_folder,filename)
         down = yf.download(ticker,progress=False,period="max")
+        print(down.columns)
+        down = down.reset_index()
+        if isinstance(down.columns, pd.MultiIndex):
+            down.columns = down.columns.get_level_values(0)
+
         down.to_csv(fullpath,index=False)
+        atickers[ticker] = date.today().isoformat()
         return down
