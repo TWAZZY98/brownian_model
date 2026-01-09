@@ -8,7 +8,9 @@ json_file_path = 'data.json'
 csv_folder = 'csvfolder'
 
 os.makedirs(csv_folder, exist_ok=True)
-
+#load json create a data json if it doesnt exits
+#else load the atickers to the data json
+#if file is corrupted change the data json to empty
 def _load_json():
     global atickers
     
@@ -24,11 +26,11 @@ def _load_json():
         atickers ={}
         with open(json_file_path, "w") as file:
             json.dump({},file)
-    
+#dumps atickers to the data json
 def _save_json():
     with open(json_file_path,"w") as file:
         json.dump(atickers,file)
-
+#get data loads data from json to the atickers
 def get_data(ticker:str):
     _load_json()
     down = None
@@ -51,7 +53,8 @@ def get_data(ticker:str):
             down = pd.read_csv(filepath)
             
     return down
-
+# returns the downloaded ticker data
+# updates the aticker date
 def _update_ticker_data(ticker):
         filename = f"{ticker}.csv"
         fullpath = os.path.join(csv_folder,filename)
