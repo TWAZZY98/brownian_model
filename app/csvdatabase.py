@@ -3,6 +3,7 @@ import yfinance as yf
 import pandas as pd
 import json
 from datetime import date
+import numpy as np
 
 json_file_path = 'data.json'
 csv_folder = 'csvfolder'
@@ -31,7 +32,7 @@ def _save_json():
     with open(json_file_path,"w") as file:
         json.dump(atickers,file)
 #get data loads data from json to the atickers
-def get_data(ticker:str):
+def get_data(ticker:str)->np.array:
     _load_json()
     down = None
     if ticker not in atickers:
@@ -51,8 +52,8 @@ def get_data(ticker:str):
             filename = f"{ticker}.csv"
             filepath = os.path.join(csv_folder,filename)
             down = pd.read_csv(filepath)
-            
-    return down
+    return down.to_numpy()
+
 # returns the downloaded ticker data
 # updates the aticker date
 def _update_ticker_data(ticker):
@@ -67,3 +68,8 @@ def _update_ticker_data(ticker):
         down.to_csv(fullpath,index=False)
         atickers[ticker] = date.today().isoformat()
         return down
+def get_close_data(t)->np.array:
+    arr = get_data(t)
+    arr = np.transpose(arr)
+    ret = arr[1]
+    return ret

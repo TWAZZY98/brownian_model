@@ -31,3 +31,4 @@ def test_run():
     predPrice = dft['Close'].iloc[-1] + predRet * float(time)
     print(f"predicted return: {predRet*100}%")
     print(f"predicted price: \n{predPrice}")
+
