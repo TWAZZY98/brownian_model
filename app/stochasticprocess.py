@@ -1,4 +1,5 @@
 import numpy as np
+from numpy import random
 from matplotlib import pyplot as mp
 import csvdatabase as csvdb
 # S(t) = S(0)e^((drift -0.5vol^2)t+vol*B(t))
@@ -43,9 +44,19 @@ class geometricbrownian(stochasticprocess):
         return grid
     def get_time_grid(self):
         return self.time_grid
-#need data, how long the simulate the model, and how many simulations to perform
-def predict_for_data(data:np.array,time_days:int, num_of_sim:int):
-    pass
+
+def predict_for_data(ticker:str,time_days:float, num_of_sim:int,mu:float,sigma:float):
+    data = csvdb.get_close_data(ticker)
+    seed = random.randint(0,99999999)
+    n = geometricbrownian(data[len(data)-1],mu,sigma,1,num_of_sim,seed)
+    g = n.multiplesimplepath(5)
+    data_x = len(data[6700:])
+    new_time_grid = n.get_time_grid()
+    for i in range(len(n.get_time_grid())):
+        new_time_grid[i-1] = new_time_grid[i-1]*time_days + data_x-1
+    mp.plot(new_time_grid,g)
+    mp.plot(data[6700:])
+    mp.show()
             
 class arthmeticbrownian(stochasticprocess):
     def __init__(self,S0:float,mu:float,sigma:float,T:float,n_steps:int,seed=None):
