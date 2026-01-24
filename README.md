@@ -1,6 +1,6 @@
 <h1 align="center">📊 Stan's Stock Market Analyser</h1>
 A Python-based stock market analysis tool for exploring historical price data, identifying trends, and generating price predictions.
-Planned features include support for importing custom trading strategies and benchmarking them against historical and simulated market data.
+Planned features include a user-friendly graphical interface, support for importing custom trading strategies, and tools for benchmarking their performance against historical and simulated market data.
 
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
