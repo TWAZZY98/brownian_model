@@ -10,7 +10,7 @@ def main():
     #g.simplepath()
     #g.multiplesimplepath(100)
     
-    sp.predict_for_data('NVDA',30,60,0.025,0.1)
+    sp.predict_for_data('NVDA',30,30,0.025,0.1,1000)
     
 
 if __name__ == "__main__": 

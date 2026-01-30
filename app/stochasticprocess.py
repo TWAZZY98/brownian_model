@@ -45,11 +45,11 @@ class geometricbrownian(stochasticprocess):
     def get_time_grid(self):
         return self.time_grid
 
-def predict_for_data(ticker:str,time_days:float, num_of_sim:int,mu:float,sigma:float):
+def predict_for_data(ticker:str,time_days:float, num_of_data:int,mu:float,sigma:float,num_of_sim:int):
     data = csvdb.get_close_data(ticker)
     seed = random.randint(0,99999999)
-    n = geometricbrownian(data[len(data)-1],mu,sigma,1,num_of_sim,seed)
-    g = n.multiplesimplepath(5)
+    n = geometricbrownian(data[len(data)-1],mu,sigma,1,num_of_data,seed)
+    g = n.multiplesimplepath(num_of_sim)
     data_x = len(data[6700:])
     new_time_grid = n.get_time_grid()
     for i in range(len(n.get_time_grid())):
