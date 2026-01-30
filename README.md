@@ -4,7 +4,7 @@ Planned features include a user-friendly graphical interface, support for import
 
 <br>Showcase:<br>
 NVDA 1/30/2026<br>
-A thousand, thirty-day simulations with one simulation per day
+A thousand, thirty-day simulations with one simulation per day<br>
 predicted return: 1.5% and volatility coefficient: 0.025
 <a align="center"> ![Showcase](images/showcase_1.png)</a>
 
