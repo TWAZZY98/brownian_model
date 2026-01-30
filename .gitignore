@@ -1,3 +1,4 @@
 csvfolder
 .vscode
 data.json
+__pycache__
