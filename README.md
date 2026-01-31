@@ -16,7 +16,7 @@ predicted return: 1.5% and volatility coefficient: 0.025
   - sudo apt install python3-venv<br>
   - python3 -m venv venv<br>
   - source venv/bin/activate<br>
-    - you will know that you are in the virtual enviroment when (venv) apears<br>
+    - you will know that you are in the virtual enviroment when (venv) appears<br>
   - pip install -r requirements.txt<br>
     - installs all required packages<br>
 4) cd app<br>
