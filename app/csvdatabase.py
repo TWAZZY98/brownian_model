@@ -68,7 +68,7 @@ def _update_ticker_data(ticker):
         down.to_csv(fullpath,index=False)
         atickers[ticker] = date.today().isoformat()
         return down
-def get_close_data(t)->np.array:
+def get_close_data(t)->np.ndarray:
     arr = get_data(t)
     arr = np.transpose(arr)
     ret = arr[1]
