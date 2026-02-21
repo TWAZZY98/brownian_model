@@ -3,6 +3,7 @@ from numpy import random
 from matplotlib import pyplot as mp
 import csvdatabase as csvdb
 import paramiters as par
+
 # S(t) = S(0)e^((drift -0.5vol^2)t+vol*B(t))
 
 #drift mu - expected return per unit of time
@@ -48,26 +49,28 @@ class geometricbrownian(stochasticprocess):
     def get_time_grid(self):
         return self.time_grid
 
-def predict_for_data(ticker:str,time_days:float, num_of_data:int,mu:float,sigma:float,num_of_sim:int)->np.array:
+def predict_for_data(ticker:str,time_days:float, num_of_data:int,mu:float,sigma:float,num_of_sim:int)->list:
     data = csvdb.get_close_data(ticker)
     seed = random.randint(0,99999999)#change the number later for sum else
+    startDate= -252*5
     m = mu
     s = sigma
     if mu == 0 and sigma ==0:
-        pars = par.calc_daily_sigma_mu(data[10000:])
+        pars = par.calc_daily_sigma_mu(data[startDate:])
         print(pars)
         m = pars[0]
         s = pars[1]
     n = geometricbrownian(data[len(data)-1],m,s,time_days,num_of_data,seed)
     g = n.multiplesimplepath(num_of_sim)
-    data_x = len(data[10000:])
+    data_x = len(data[startDate:])
     new_time_grid = n.get_time_grid()
-    for i in range(len(n.get_time_grid())):
-        new_time_grid[i-1] = new_time_grid[i-1] + data_x-1
+    # for i in range(len(n.get_time_grid())):
+    #     new_time_grid[i-1] = new_time_grid[i-1] + data_x-1
+    new_time_grid = n.get_time_grid() + data_x - 1
     mp.plot(new_time_grid,g)
-    mp.plot(data[10000:])
+    mp.plot(data[startDate:])
     mp.show()
-    return g[-1]
+    return [g[-1],pars]
             
 class arthmeticbrownian(stochasticprocess):
     def __init__(self,S0:float,mu:float,sigma:float,T:float,n_steps:int,seed=None):

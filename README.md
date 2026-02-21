@@ -3,10 +3,12 @@ A Python-based stock market analysis tool for exploring historical price data, i
 Planned features include a user-friendly graphical interface, support for importing custom trading strategies, and tools for benchmarking their performance against historical and simulated market data.
 
 <br>Showcase:<br>
-NVDA 1/30/2026<br>
-A thousand, thirty-day simulations with one simulation per day<br>
-predicted return: 1.5% and volatility coefficient: 0.025
-<a align="center"> ![Showcase](images/showcase_1.png)</a>
+NVDA 2/21/2026<br>
+A thousand, hundred-day simulations with one simulation per day<br>
+
+<a align="center"> ![Showcase](images/showcase_3_1.png)</a>
+<a align="center"> ![Showcase](images/showcase_3_2.png)</a>
+<a align="center"> ![Showcase](images/showcase_3_3.png)</a>
 
 ## Install-linux ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 
