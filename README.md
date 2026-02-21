@@ -6,9 +6,17 @@ Planned features include a user-friendly graphical interface, support for import
 NVDA 2/21/2026<br>
 A thousand, hundred-day simulations with one simulation per day<br>
 
-<a align="center"> ![Showcase](images/showcase_3_1.png)</a>
-<a align="center"> ![Showcase](images/showcase_3_2.png)</a>
-<a align="center"> ![Showcase](images/showcase_3_3.png)</a>
+<p align="center">
+  <img src="images/showcase_3_1.png" width="600">
+</p>
+
+<p align="center">
+  <img src="images/showcase_3_2.png" width="600">
+</p>
+
+<p align="center">
+  <img src="images/showcase_3_3.png" width="600">
+</p>
 
 ## Install-linux ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 
