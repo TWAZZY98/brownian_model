@@ -2,7 +2,7 @@
 A Python-based stock market analysis tool for exploring historical price data, identifying trends, and generating price predictions.
 Planned features include a user-friendly graphical interface, support for importing custom trading strategies, and tools for benchmarking their performance against historical and simulated market data.
 
-<br>Showcase:<br>
+## Showcase
 NVDA 2/21/2026<br>
 A thousand, hundred-day simulations with one simulation per day<br>
 
