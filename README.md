@@ -1,4 +1,5 @@
 <h1 align="center">📊 Stan's Stock Market Analyser</h1>
+<h1 align="center">Version: Alpha 0.1.1</h1>
 A Python-based stock market analysis tool for exploring historical price data, identifying trends, and generating price predictions.
 Planned features include a user-friendly graphical interface, support for importing custom trading strategies, and tools for benchmarking their performance against historical and simulated market data.
 
@@ -30,7 +31,7 @@ A thousand, hundred-day simulations with one simulation per day<br>
   - sudo apt install python3-venv<br>
   - python3 -m venv venv<br>
   - source venv/bin/activate<br>
-    - you will know that you are in the virtual enviroment when (venv) apears<br>
+    - you will know that you are in the virtual enviroment when (venv) appears<br>
   - pip install -r requirements.txt<br>
     - installs all required packages<br>
 4) cd app<br>
