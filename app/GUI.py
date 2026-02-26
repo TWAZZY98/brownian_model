@@ -75,16 +75,16 @@ class GUI:
             print("invalid days in the future entered")
             return
         
-        days = sday- eday
-        
-        d =sp.predict_for_data(ticker_value,days,days,0,0,numOfSim, eday, sday, daysInFuture,daysInPastToProbe)
+        d =sp.predict_for_data(ticker_value,0,0,numOfSim, eday, sday, daysInFuture,daysInPastToProbe)
         mean = nm.bar_model_data(d[0])
         vol_and_ret = d[1]
-        self.brownian_sim_results(mean,numOfSim,vol_and_ret[1],vol_and_ret[0])
+        S0 = d[2]
+        self.brownian_sim_results(mean,numOfSim,vol_and_ret[1],vol_and_ret[0], S0)
 
-    def brownian_sim_results(self,mean:float, num_of_sim:int, vol_day:float, ret_day:float):
+    def brownian_sim_results(self,mean:float, num_of_sim:int, vol_day:float, ret_day:float, S0:float):
         top = Toplevel()
         top.title("reults of the simulation")
+        estRet = (mean-S0)/S0
         message = f"""
         Monte Carlo Simulation Summary
 
@@ -96,7 +96,9 @@ class GUI:
         Estimated daily volatility: {vol_day:.6f}
         Estimated annual volatility: {vol_day * np.sqrt(252) * 100:.2f}%
 
+        Initial price: {S0:.6f}
         Mean simulated return: {mean:.6f}
+        Percent simulated return: {estRet*100:.6f}%
         """
         label = tk.Label(top, text=message)
         label.pack()

@@ -49,7 +49,7 @@ class geometricbrownian(stochasticprocess):
     def get_time_grid(self):
         return self.time_grid
 
-def predict_for_data(ticker:str,time_days:float, num_of_data:int,mu:float,sigma:float,num_of_sim:int,end_day:int,start_day:int,daysInFuture:int,daysToProbe:int)->list:
+def predict_for_data(ticker:str,mu:float,sigma:float,num_of_sim:int,end_day:int,start_day:int,daysInFuture:int,daysToProbe:int)->list:
     data = csvdb.get_close_data(ticker)
     seed = random.randint(0,99999999)#change the number later for sum else
     m = mu
@@ -65,26 +65,26 @@ def predict_for_data(ticker:str,time_days:float, num_of_data:int,mu:float,sigma:
     if daysInFuture <= 0:
         prediction_data_slice = historical_slice
     else:
-        prediction_data_slice = data[-(daysToProbe+end_day):-end_day]
+        if end_day == 0:
+            prediction_data_slice = data[-daysToProbe:]
+        else:
+            prediction_data_slice = data[-(daysToProbe + end_day):-end_day]
     if mu == 0 and sigma ==0:
         pars = par.calc_daily_sigma_mu(prediction_data_slice)
-        print(pars)
         m = pars[0]
         s = pars[1]
     S0 = historical_slice[-1] 
     n = geometricbrownian(S0,m,s,daysInFuture,daysInFuture,seed)
     g = n.multiplesimplepath(num_of_sim)
     data_x = len(historical_slice)
-    new_time_grid = n.get_time_grid()
-    # for i in range(len(n.get_time_grid())):
-    #     new_time_grid[i-1] = new_time_grid[i-1] + data_x-1
+
     new_time_grid = np.array(n.get_time_grid()) + data_x - 1
     mp.plot(new_time_grid,g)
     mp.plot(historical_slice)
     mp.axvline(x=start_day-daysToProbe, color= 'b', label = 'probing start')
     mp.legend()
     mp.show()
-    return [g[-1],pars]
+    return [g[-1],pars,S0]
             
 class arthmeticbrownian(stochasticprocess):
     def __init__(self,S0:float,mu:float,sigma:float,T:float,n_steps:int,seed=None):
