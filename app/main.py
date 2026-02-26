@@ -1,6 +1,6 @@
 import gui
 
-VERSION:str = "Alpha"
+VERSION:str = "Alpha 0.1.1"
 
 def main():
     ginterface = gui.GUI(VERSION)

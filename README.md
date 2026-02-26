@@ -3,19 +3,23 @@ A Python-based stock market analysis tool for exploring historical price data, i
 Planned features include a user-friendly graphical interface, support for importing custom trading strategies, and tools for benchmarking their performance against historical and simulated market data.
 
 ## Showcase
-AAPL 2/21/2026<br>
+AAPL 2/26/2026<br>
 A thousand, hundred-day simulations with one simulation per day<br>
 
 <p align="center">
-  <img src="images/showcase_3_1.png" width="600">
+  <img src="images/showcase_4_1.png" width="600">
 </p>
 
 <p align="center">
-  <img src="images/showcase_3_2.png" width="600">
+  <img src="images/showcase_4_2.png" width="600">
 </p>
 
 <p align="center">
-  <img src="images/showcase_3_3.png" width="600">
+  <img src="images/showcase_4_3.png" width="600">
+</p>
+
+<p align="center">
+  <img src="images/showcase_4_4.png" width="600">
 </p>
 
 ## Install-linux ![Python](https://img.shields.io/badge/Python-3.8+-blue)
