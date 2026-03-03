@@ -42,17 +42,20 @@ def get_data(ticker:str)->np.array:
         _save_json()
 
     else:
-        print(f"last updated {atickers[ticker]} do you want to update {ticker} data? y-> Yes, n-> no")
-        dec = input()
-        dec = dec.lower()
-        if dec =="y":
-            down = _update_ticker_data(ticker)
-            _save_json()
+        if atickers[ticker] == date.today().isoformat():
+            print(f"last update of {ticker} occured today")
         else:
-            filename = f"{ticker}.csv"
-            filepath = os.path.join(csv_folder,filename)
-            down = pd.read_csv(filepath)
-    return down.to_numpy()
+            print(f"last updated {atickers[ticker]} do you want to update {ticker} data? y-> Yes, n-> no")
+            dec = input()
+            dec = dec.lower()
+            if dec =="y":
+                down = _update_ticker_data(ticker)
+                _save_json()
+                
+        filename = f"{ticker}.csv"
+        filepath = os.path.join(csv_folder,filename)
+        down = pd.read_csv(filepath)
+        return down.to_numpy()
 
 # returns the downloaded ticker data
 # updates the aticker date
